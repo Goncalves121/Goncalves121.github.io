@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucas Gonçalves — Estudante de Desenvolvimento de Software</title>
+<meta name="description" content="Portfólio de Lucas Gonçalves, estudante de Desenvolvimento de Software Multiplataforma na FATEC, em busca da primeira oportunidade em TI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#100F0B;
+    --ink-soft:#18160F;
+    --ink-card:#1D1B14;
+    --line: rgba(244,239,228,0.10);
+    --line-strong: rgba(244,239,228,0.20);
+    --paper:#F3EEE1;
+    --paper-dim:#B9B2A0;
+    --paper-faint:#8A8574;
+    --amber:#E8A33D;
+    --amber-soft:#F0C079;
+    --amber-dim:#7A5A22;
+    --teal:#5BB8A8;
+    --red-dot:#E5605A;
+    --yellow-dot:#E8B84A;
+    --green-dot:#5FB97A;
+    --radius:10px;
+    --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
+  }
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 15% -10%, rgba(232,163,61,0.10), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(91,184,168,0.07), transparent 55%),
+      var(--ink);
+    color:var(--paper);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; }
+  img{ max-width:100%; display:block; }
+
+  ::selection{ background:var(--amber); color:var(--ink); }
+
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--amber);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  .wrap{ max-width:920px; margin:0 auto; padding:0 24px; }
+
+  /* ---------- top chrome ---------- */
+  .chrome{
+    position:sticky; top:0; z-index:50;
+    background:rgba(16,15,11,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .chrome-inner{
+    max-width:920px; margin:0 auto; padding:14px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+    font-family:var(--mono); font-size:13px; color:var(--paper-dim);
+  }
+  .dots{ display:flex; gap:7px; }
+  .dots span{ width:11px; height:11px; border-radius:50%; display:inline-block; }
+  .dots .r{ background:var(--red-dot); }
+  .dots .y{ background:var(--yellow-dot); }
+  .dots .g{ background:var(--green-dot); }
+  .chrome-title{ opacity:0.8; }
+  .chrome-nav{ display:flex; gap:20px; }
+  .chrome-nav a{ text-decoration:none; color:var(--paper-dim); transition:color .15s; }
+  .chrome-nav a:hover{ color:var(--amber-soft); }
+  @media (max-width:640px){ .chrome-nav{ display:none; } }
+
+  /* ---------- hero / terminal ---------- */
+  .hero{ padding:72px 0 56px; }
+  .terminal{
+    background:var(--ink-soft);
+    border:1px solid var(--line-strong);
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:0 30px 80px -30px rgba(0,0,0,0.6);
+  }
+  .terminal-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:11px 14px;
+    border-bottom:1px solid var(--line);
+    font-family:var(--mono); font-size:12px; color:var(--paper-faint);
+  }
+  .terminal-bar .path{ margin-left:8px; }
+  .terminal-body{
+    padding:26px 28px 30px;
+    font-family:var(--mono);
+    font-size:14.5px;
+  }
+  .terminal-body .line{ margin:0 0 6px; color:var(--paper-dim); }
+  .terminal-body .prompt{ color:var(--teal); }
+  .terminal-body .cmd{ color:var(--paper); }
+  .type-out{
+    color:var(--paper);
+    white-space:pre-wrap;
+    display:block;
+    margin:10px 0 4px;
+    min-height:3.4em;
+  }
+  .cursor{
+    display:inline-block; width:8px; height:1.1em; background:var(--amber);
+    margin-left:2px; vertical-align:-2px;
+    animation:blink 1s steps(1) infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .hero-name{
+    font-family:var(--mono);
+    font-weight:800;
+    font-size:clamp(34px, 6vw, 54px);
+    letter-spacing:-0.01em;
+    margin:30px 0 6px;
+    color:var(--paper);
+  }
+  .hero-name .dot{ color:var(--amber); }
+  .hero-role{
+    font-family:var(--mono);
+    color:var(--amber-soft);
+    font-size:15px;
+    margin:0 0 18px;
+  }
+  .hero-desc{
+    max-width:60ch;
+    color:var(--paper-dim);
+    font-size:16px;
+    margin:0 0 28px;
+  }
+  .hero-actions{ display:flex; flex-wrap:wrap; gap:12px; }
+  .btn{
+    font-family:var(--mono);
+    font-size:13.5px;
+    text-decoration:none;
+    padding:11px 18px;
+    border-radius:7px;
+    border:1px solid var(--line-strong);
+    color:var(--paper);
+    transition:border-color .15s, transform .15s, background .15s;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn:hover{ border-color:var(--amber); transform:translateY(-1px); }
+  .btn.primary{ background:var(--amber); color:var(--ink); border-color:var(--amber); font-weight:700; }
+  .btn.primary:hover{ background:var(--amber-soft); }
+
+  /* ---------- sections ---------- */
+  section{ padding:64px 0; border-top:1px solid var(--line); }
+  .eyebrow{
+    font-family:var(--mono); font-size:12.5px; color:var(--teal);
+    letter-spacing:0.06em; margin:0 0 10px;
+  }
+  .eyebrow::before{ content:"// "; color:var(--paper-faint); }
+  h2{
+    font-family:var(--mono); font-size:26px; font-weight:700;
+    margin:0 0 22px; color:var(--paper);
+  }
+  p.lead{ color:var(--paper-dim); max-width:65ch; font-size:15.5px; }
+
+  /* ---------- skills ---------- */
+  .skill-group{ margin-bottom:22px; }
+  .skill-group h3{
+    font-family:var(--mono); font-size:12.5px; text-transform:uppercase;
+    letter-spacing:0.08em; color:var(--paper-faint); margin:0 0 12px; font-weight:600;
+  }
+  .chips{ display:flex; flex-wrap:wrap; gap:10px; }
+  .chip{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--mono); font-size:13px;
+    background:var(--ink-card); border:1px solid var(--line);
+    padding:8px 13px; border-radius:7px; color:var(--paper);
+  }
+  .chip .lang-dot{ width:9px; height:9px; border-radius:50%; flex:none; }
+
+  /* ---------- project ---------- */
+  .project-card{
+    background:var(--ink-card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .project-head{
+    padding:24px 26px 18px;
+    border-bottom:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;
+  }
+  .project-head h3{ font-family:var(--mono); font-size:19px; margin:0 0 6px; color:var(--paper); }
+  .project-head .sub{ color:var(--paper-faint); font-size:13.5px; }
+  .tags{ display:flex; flex-wrap:wrap; gap:8px; }
+  .tag{
+    font-family:var(--mono); font-size:11.5px; color:var(--amber-soft);
+    border:1px solid var(--amber-dim); padding:4px 9px; border-radius:5px;
+  }
+  .project-body{ padding:22px 26px 26px; }
+  .project-body p{ color:var(--paper-dim); font-size:14.5px; max-width:70ch; }
+  .gallery{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:20px 0 6px;
+  }
+  .gallery figure{ margin:0; }
+  .gallery img{
+    border-radius:6px; border:1px solid var(--line); aspect-ratio:16/10; object-fit:cover; object-position:top;
+    transition:transform .25s;
+  }
+  .gallery a:hover img{ transform:scale(1.02); }
+  .gallery figcaption{
+    font-family:var(--mono); font-size:11px; color:var(--paper-faint); margin-top:6px;
+  }
+  @media (max-width:640px){ .gallery{ grid-template-columns:1fr; } }
+  .project-links{ margin-top:20px; display:flex; gap:12px; flex-wrap:wrap; }
+
+  /* ---------- journey / commit log ---------- */
+  .log{ position:relative; padding-left:26px; }
+  .log::before{
+    content:""; position:absolute; left:6px; top:6px; bottom:6px; width:1px;
+    background:var(--line-strong);
+  }
+  .commit{ position:relative; padding-bottom:26px; }
+  .commit:last-child{ padding-bottom:0; }
+  .commit::before{
+    content:""; position:absolute; left:-26px; top:4px; width:11px; height:11px;
+    border-radius:50%; background:var(--ink); border:2px solid var(--amber);
+  }
+  .commit-top{ display:flex; gap:10px; align-items:baseline; flex-wrap:wrap; font-family:var(--mono); font-size:12.5px; }
+  .commit-hash{ color:var(--teal); }
+  .commit-type{ padding:2px 8px; border-radius:4px; font-size:11px; font-weight:700; }
+  .commit-type.feat{ background:rgba(91,184,168,0.15); color:var(--teal); }
+  .commit-type.chore{ background:rgba(232,163,61,0.15); color:var(--amber-soft); }
+  .commit-type.docs{ background:rgba(180,180,180,0.12); color:var(--paper-dim); }
+  .commit-date{ color:var(--paper-faint); margin-left:auto; }
+  .commit-msg{ margin:8px 0 0; color:var(--paper); font-size:15px; }
+  .commit-detail{ margin:4px 0 0; color:var(--paper-dim); font-size:13.5px; }
+
+  /* ---------- footer / contact ---------- */
+  footer{ border-top:1px solid var(--line); padding:56px 0 48px; }
+  .contact-grid{ display:flex; justify-content:space-between; gap:30px; flex-wrap:wrap; }
+  .contact-links{ display:flex; flex-direction:column; gap:10px; font-family:var(--mono); font-size:14px; }
+  .contact-links a{ text-decoration:none; color:var(--paper-dim); transition:color .15s; }
+  .contact-links a:hover{ color:var(--amber-soft); }
+  .avail{
+    font-family:var(--mono); font-size:12.5px; color:var(--paper-faint);
+    border:1px solid var(--line); border-radius:7px; padding:14px 16px; max-width:280px;
+  }
+  .avail .status{ color:var(--green-dot); }
+  .footer-note{ margin-top:36px; font-family:var(--mono); font-size:12px; color:var(--paper-faint); }
+</style>
+</head>
+<body>
+
+  <div class="chrome">
+    <div class="chrome-inner">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+        <span class="chrome-title">lucas@portfolio</span>
+      </div>
+      <nav class="chrome-nav">
+        <a href="#sobre">sobre</a>
+        <a href="#skills">skills</a>
+        <a href="#projetos">projetos</a>
+        <a href="#jornada">jornada</a>
+        <a href="#contato">contato</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <section class="hero" id="topo" style="border-top:none; padding-top:56px;">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+          <span class="path">bash — lucas@dev-jr: ~</span>
+        </div>
+        <div class="terminal-body">
+          <p class="line"><span class="prompt">lucas@dev-jr</span><span class="cmd">:~$ whoami</span></p>
+          <span class="type-out" id="typeOut"></span>
+        </div>
+      </div>
+
+      <h1 class="hero-name">Lucas Gonçalves<span class="dot">.</span></h1>
+      <p class="hero-role">estudante de desenvolvimento de software multiplataforma — fatec</p>
+      <p class="hero-desc">
+        No 2º semestre da graduação, construindo uma base sólida em lógica, back-end e banco de dados —
+        e procurando a primeira oportunidade para colocar isso em prática em uma equipe de verdade.
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#projetos">ver projetos</a>
+        <a class="btn" href="#contato">falar comigo</a>
+        <a class="btn" href="https://github.com/Goncalves121" target="_blank" rel="noopener">github ↗</a>
+      </div>
+    </section>
+
+    <section id="sobre">
+      <p class="eyebrow">sobre</p>
+      <h2>Um pouco da minha jornada</h2>
+      <p class="lead">
+        Sou aluno de Desenvolvimento de Software Multiplataforma na FATEC, em Praia Grande/SP, com previsão
+        de formatura em 2028. Antes de entrar na faculdade, concluí uma capacitação profissional de 246 horas
+        pela Microlins, passando por lógica de escritório, banco de dados e programação. Hoje aplico esse
+        conhecimento em projetos acadêmicos — o mais recente, o BarberPro, foi desenvolvido em grupo e é meu
+        projeto de destaque até aqui. Estou aberto a oportunidades de estágio em diferentes frentes da TI,
+        no formato home office ou híbrido.
+      </p>
+    </section>
+
+    <section id="skills">
+      <p class="eyebrow">stack</p>
+      <h2>Tecnologias que uso</h2>
+
+      <div class="skill-group">
+        <h3>Linguagens</h3>
+        <div class="chips">
+          <span class="chip"><span class="lang-dot" style="background:#e34c26"></span>HTML</span>
+          <span class="chip"><span class="lang-dot" style="background:#563d7c"></span>CSS</span>
+          <span class="chip"><span class="lang-dot" style="background:#f1e05a"></span>JavaScript</span>
+          <span class="chip"><span class="lang-dot" style="background:#b07219"></span>Java</span>
+          <span class="chip"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
+          <span class="chip"><span class="lang-dot" style="background:#f34b7d"></span>C++</span>
+          <span class="chip"><span class="lang-dot" style="background:#4F5D95"></span>PHP</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3>Banco de dados</h3>
+        <div class="chips">
+          <span class="chip"><span class="lang-dot" style="background:#E8A33D"></span>MySQL</span>
+          <span class="chip"><span class="lang-dot" style="background:#E8A33D"></span>SQL</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3>Ferramentas</h3>
+        <div class="chips">
+          <span class="chip"><span class="lang-dot" style="background:#f05033"></span>Git &amp; GitHub</span>
+          <span class="chip"><span class="lang-dot" style="background:#5BB8A8"></span>Adobe Photoshop</span>
+          <span class="chip"><span class="lang-dot" style="background:#5BB8A8"></span>Adobe Illustrator</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="projetos">
+      <p class="eyebrow">projeto em destaque</p>
+      <h2>BarberPro</h2>
+
+      <div class="project-card">
+        <div class="project-head">
+          <div>
+            <h3>Sistema de gestão para barbearias</h3>
+            <div class="sub">Projeto acadêmico em grupo · 2026</div>
+          </div>
+          <div class="tags">
+            <span class="tag">PHP</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">PDO</span>
+            <span class="tag">API REST</span>
+          </div>
+        </div>
+        <div class="project-body">
+          <p>
+            Plataforma completa com três níveis de acesso — Administrador, Barbeiro e Cliente — para gerenciar
+            agendamentos, clientes, barbeiros e serviços. O banco de dados relacional tem 5 tabelas com lógica
+            de auto-configuração, criando toda a estrutura automaticamente na primeira execução.
+          </p>
+
+          <div class="gallery">
+            <a href="assets/login.png" target="_blank" rel="noopener">
+              <figure>
+                <img src="assets/login.png" alt="Tela de login do BarberPro com seleção de perfil Barbeiro ou Cliente">
+                <figcaption>Tela de login</figcaption>
+              </figure>
+            </a>
+            <a href="assets/dashboard-admin.png" target="_blank" rel="noopener">
+              <figure>
+                <img src="assets/dashboard-admin.png" alt="Dashboard do administrador com agendamentos, clientes e serviços">
+                <figcaption>Dashboard — Administrador</figcaption>
+              </figure>
+            </a>
+            <a href="assets/painel-barbeiro.png" target="_blank" rel="noopener">
+              <figure>
+                <img src="assets/painel-barbeiro.png" alt="Painel do barbeiro com meta mensal de cortes e agendamentos do dia">
+                <figcaption>Painel — Barbeiro</figcaption>
+              </figure>
+            </a>
+          </div>
+
+          <div class="project-links">
+            <a class="btn primary" href="https://github.com/Goncalves121/barberPro" target="_blank" rel="noopener">ver repositório ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="jornada">
+      <p class="eyebrow">git log --oneline</p>
+      <h2>Minha jornada até aqui</h2>
+
+      <div class="log">
+        <div class="commit">
+          <div class="commit-top">
+            <span class="commit-hash">a3f9c1e</span>
+            <span class="commit-type chore">chore</span>
+            <span class="commit-date">2025</span>
+          </div>
+          <p class="commit-msg">início da graduação em Desenvolvimento de Software Multiplataforma</p>
+          <p class="commit-detail">FATEC Praia Grande — previsão de conclusão em 2028</p>
+        </div>
+
+        <div class="commit">
+          <div class="commit-top">
+            <span class="commit-hash">7d21b4a</span>
+            <span class="commit-type docs">docs</span>
+            <span class="commit-date">08/2024 – 09/2025</span>
+          </div>
+          <p class="commit-msg">capacitação profissional concluída — Microlins Pimentas (246h)</p>
+          <p class="commit-detail">Windows 10, pacote Office, Programação C#, Banco de Dados SQL, Photoshop, Illustrator</p>
+        </div>
+
+        <div class="commit">
+          <div class="commit-top">
+            <span class="commit-hash">e58f0c2</span>
+            <span class="commit-type feat">feat</span>
+            <span class="commit-date">2026</span>
+          </div>
+          <p class="commit-msg">desenvolvimento do BarberPro em grupo</p>
+          <p class="commit-detail">Sistema de gestão para barbearias — PHP, MySQL, PDO e API REST</p>
+        </div>
+
+        <div class="commit">
+          <div class="commit-top">
+            <span class="commit-hash">HEAD</span>
+            <span class="commit-type docs">docs</span>
+            <span class="commit-date">agora</span>
+          </div>
+          <p class="commit-msg">em busca da primeira oportunidade em TI</p>
+          <p class="commit-detail">Disponível para estágio — home office ou híbrido</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer id="contato">
+    <div class="wrap">
+      <p class="eyebrow">contato</p>
+      <div class="contact-grid">
+        <div class="contact-links">
+          <a href="mailto:lucasgsantoss1906@gmail.com">lucasgsantoss1906@gmail.com</a>
+          <a href="https://www.linkedin.com/in/lucas-gon%C3%A7alves-718472410/" target="_blank" rel="noopener">linkedin.com/in/lucas-gonçalves</a>
+          <a href="https://github.com/Goncalves121" target="_blank" rel="noopener">github.com/Goncalves121</a>
+        </div>
+        <div class="avail">
+          <span class="status">●</span> disponível para estágio<br>
+          home office ou híbrido<br>
+          Praia Grande / São Paulo e região / Arujá
+        </div>
+      </div>
+      <p class="footer-note">construído com HTML, CSS e JavaScript — sem frameworks.</p>
+    </div>
+  </footer>
+
+<script>
+  (function(){
+    var text = "Lucas Gonçalves — estudante de Dev de Software Multiplataforma,\nem busca da primeira oportunidade em TI.";
+    var el = document.getElementById('typeOut');
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if(reduced){
+      el.textContent = text;
+      return;
+    }
+
+    var i = 0;
+    function type(){
+      if(i <= text.length){
+        el.textContent = text.slice(0, i);
+        i++;
+        setTimeout(type, 22);
+      } else {
+        el.innerHTML = text.replace(/\n/g, '<br>') + '<span class="cursor"></span>';
+      }
+    }
+    type();
+  })();
+</script>
+
+</body>
+</html>
